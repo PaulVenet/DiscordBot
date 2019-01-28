@@ -1,0 +1,14 @@
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\bin\Debug\netcoreapp2.0\Eynwa.Logic.deps.json
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\bin\Debug\netcoreapp2.0\Eynwa.Logic.dll
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\bin\Debug\netcoreapp2.0\Eynwa.Logic.pdb
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\bin\Debug\netcoreapp2.0\Eynwa.Interop.dll
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\bin\Debug\netcoreapp2.0\Eynwa.Models.dll
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\bin\Debug\netcoreapp2.0\Eynwa.Interop.pdb
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\bin\Debug\netcoreapp2.0\Eynwa.Models.pdb
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\obj\Debug\netcoreapp2.0\Eynwa.Logic.csprojAssemblyReference.cache
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\obj\Debug\netcoreapp2.0\Eynwa.Logic.csproj.CoreCompileInputs.cache
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\obj\Debug\netcoreapp2.0\Eynwa.Logic.AssemblyInfoInputs.cache
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\obj\Debug\netcoreapp2.0\Eynwa.Logic.AssemblyInfo.cs
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\obj\Debug\netcoreapp2.0\Eynwa.Logic.csproj.CopyComplete
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\obj\Debug\netcoreapp2.0\Eynwa.Logic.dll
+G:\Projects\VS\EynwaDiscordBot\Discord.Logic\obj\Debug\netcoreapp2.0\Eynwa.Logic.pdb

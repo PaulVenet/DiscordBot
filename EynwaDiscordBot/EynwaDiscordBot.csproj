@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <StartupObject>EynwaDiscordBot.Program</StartupObject>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Discord.Net" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.Commands" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.Core" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.Rest" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.Rpc" Version="1.0.2" />
+    <PackageReference Include="Discord.Net.Webhook" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net.WebSocket" Version="2.0.0-beta" />
+    <PackageReference Include="Refit.Insane.PowerPack" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ApiRest\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Discord.Interop\Eynwa.Interop.csproj" />
+    <ProjectReference Include="..\Discord.Logic\Eynwa.Logic.csproj" />
+    <ProjectReference Include="..\Discord.Models\Eynwa.Models.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\bin\Debug\netcoreapp2.0\x86\e_sqlite3.dll
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\bin\Debug\netcoreapp2.0\x64\e_sqlite3.dll
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\bin\Debug\netcoreapp2.0\Eynwa.Models.deps.json
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\bin\Debug\netcoreapp2.0\Eynwa.Models.dll
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\bin\Debug\netcoreapp2.0\Eynwa.Models.pdb
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\obj\Debug\netcoreapp2.0\Eynwa.Models.csprojAssemblyReference.cache
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\obj\Debug\netcoreapp2.0\Eynwa.Models.csproj.CoreCompileInputs.cache
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\obj\Debug\netcoreapp2.0\Eynwa.Models.AssemblyInfoInputs.cache
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\obj\Debug\netcoreapp2.0\Eynwa.Models.AssemblyInfo.cs
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\obj\Debug\netcoreapp2.0\Eynwa.Models.dll
+G:\Projects\VS\EynwaDiscordBot\Discord.Models\obj\Debug\netcoreapp2.0\Eynwa.Models.pdb
