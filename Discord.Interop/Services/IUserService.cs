@@ -1,6 +1,4 @@
-﻿using Discord.Interop.Common;
-using EynwaDiscordBot.Models.Constants;
-using EynwaDiscordBot.Models.Diagnostics;
+﻿using EynwaDiscordBot.Models.Constants;
 using EynwaDiscordBot.Models.Entities.Account;
 using Refit;
 using Refit.Insane.PowerPack.Attributes;
@@ -11,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace Discord.Interop.Services
 {
-    [ApiDefinition(SystemConstants.BaseUrl, typeof(HttpDiagnosticsHandler))]
     //TODO : change token to a variable with bearer behind
     //[Headers("Authorization:" + SystemConstants.SwaggerToken, "api_key:" + SystemConstants.ApiKey)]
-    public interface IUserService : IService
+    public interface IUserService
     {
         [Post("/User")]
         Task<UserInfo> Create([Body] UserInfo param);

@@ -1,8 +1,0 @@
-Constants\SystemConstants.cs
-Diagnostics\DebugProcessTimer.cs
-Diagnostics\HttpDiagnosticsHandler.cs
-Entities\Account\UserInfo.cs
-Entities\Converter\CustomStringEnumConverter.cs
-Enum\Roles.cs
-GameUpdateDate.cs
-C:\Users\Eithing-PC\AppData\Local\Temp\.NETCoreApp,Version=v2.0.AssemblyAttributes.cs

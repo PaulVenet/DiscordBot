@@ -9,7 +9,6 @@ using Discord;
 using System.Threading;
 using System.Collections.Generic;
 using EynwaDiscordBot.Models;
-using Discord.Interop.Logic;
 using Refit;
 using Discord.Interop.Services;
 
@@ -21,11 +20,8 @@ namespace EynwaDiscordBot
         private CommandService _service;
         private List<GameUpdateDate> userInGameList = new List<GameUpdateDate>();
 
-        private readonly IUserLogic userLogic;
-
-        public CommandHandler(DiscordSocketClient client, IUserLogic userLogic)
+        public CommandHandler(DiscordSocketClient client)
         {
-            this.userLogic = userLogic;
             _client = client;
             _service = new CommandService();
 
@@ -85,11 +81,20 @@ namespace EynwaDiscordBot
 
                 if(!result.IsSuccess)
                 {
-                    await this.userLogic.GetUserById("1");
+                    var userService = RestService.For<IUserService>("https://localhost:44398/api");
+
+                    var getuser = await userService.GetUser("1");
+                    //await this.userLogic.GetUserById("1");
                     var eynwaGuild = this._client.GetGuild(248520271357542410);
                     foreach(var user in eynwaGuild.Users)
                     {
-                        await this.userLogic.CreateAccount((long)user.Id, user.Username, user.Discriminator, Enum.Parse< Models.Enum.Roles>(user.Roles.First().ToString()));
+                        await userService.Create(new Models.Entities.Account.UserInfo
+                        {
+                            DiscordId = (long)user.Id,
+                            Discriminator = user.Discriminator,
+                            Name = user.Username,
+                            Roles = user.Roles.First().Name
+                        });
                     }
                     //await context.Channel.SendMessageAsync("Fanfreluche !!!! cette commande n'exite pas.");
                 }

@@ -17,8 +17,7 @@ namespace EynwaDiscordBot.Models.Entities.Account
         public string Name { get; set; }
         [JsonProperty("discriminator")]
         public string Discriminator { get; set; }
-        [JsonConverter(typeof(CustomStringEnumConverter), true)]
         [JsonProperty("roles")]
-        public Roles Roles { get; set; }
+        public string Roles { get; set; }
     }
 }
