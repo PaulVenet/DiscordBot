@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Discord.Interop.Services
 {
     //TODO : change token to a variable with bearer behind
-    //[Headers("Authorization:" + SystemConstants.SwaggerToken, "api_key:" + SystemConstants.ApiKey)]
+    [Headers("Content-Type:" + "application/json")]
     public interface IUserService
     {
         [Post("/User")]
@@ -18,6 +18,9 @@ namespace Discord.Interop.Services
 
         [Get("/User/{uid}")]
         Task<UserInfo> GetUser(string uid);
+
+        [Get("/User")]
+        Task<List<UserInfo>> GetAllUsers();
 
         [Patch("/User/{uid}")]
         Task<UserInfo> PatchUser(string uid, [Body] UserInfo param);

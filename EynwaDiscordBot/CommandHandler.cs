@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using EynwaDiscordBot.Models;
 using Refit;
 using Discord.Interop.Services;
+using EynwaDiscordBot.Models.Constants;
 
 namespace EynwaDiscordBot
 {
@@ -81,20 +82,22 @@ namespace EynwaDiscordBot
 
                 if(!result.IsSuccess)
                 {
-                    var userService = RestService.For<IUserService>("https://localhost:44398/api");
+                    var userService = RestService.For<IUserService>(SystemConstants.BaseLocaleUrl); // "http://91.121.178.28:5009/api");
 
-                    var getuser = await userService.GetUser("1");
-                    //await this.userLogic.GetUserById("1");
+                    //var users = await userService.GetAllUsers();
                     var eynwaGuild = this._client.GetGuild(248520271357542410);
                     foreach(var user in eynwaGuild.Users)
                     {
-                        await userService.Create(new Models.Entities.Account.UserInfo
+                        if(!user.IsBot)
                         {
-                            DiscordId = (long)user.Id,
-                            Discriminator = user.Discriminator,
-                            Name = user.Username,
-                            Roles = user.Roles.First().Name
-                        });
+                            await userService.Create(new Models.Entities.Account.UserInfo
+                            {
+                                DiscordId = user.Id.ToString(),
+                                Discriminator = user.Discriminator,
+                                Name = user.Username,
+                                Roles = user.Roles.First().Name
+                            });
+                        }
                     }
                     //await context.Channel.SendMessageAsync("Fanfreluche !!!! cette commande n'exite pas.");
                 }
