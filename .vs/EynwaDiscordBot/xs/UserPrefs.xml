@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{DC91650E-A871-4C0B-A619-388BBCBBD67E}|Default">
+  <MonoDevelop.Ide.ItemProperties.EynwaDiscordBot PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Discord.Models/Entities/Account/UserInfo.cs">
+    <Files>
+      <File FileName="EynwaDiscordBot/CommandHandler.cs" Line="105" Column="53" />
+      <File FileName="Discord.Interop/Services/IUserService.cs" Line="27" Column="56" />
+      <File FileName="Discord.Models/Constants/SystemConstants.cs" Line="12" Column="2" />
+      <File FileName="Discord.Models/Entities/Account/UserInfo.cs" Line="10" Column="18" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

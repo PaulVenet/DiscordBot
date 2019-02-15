@@ -20,6 +20,9 @@ namespace EynwaDiscordBot
         private DiscordSocketClient _client;
         private CommandService _service;
         private List<GameUpdateDate> userInGameList = new List<GameUpdateDate>();
+        IUserService userService;
+        SocketGuild eynwaGuild;
+
 
         public CommandHandler(DiscordSocketClient client)
         {
@@ -29,9 +32,12 @@ namespace EynwaDiscordBot
             _service.AddModulesAsync(Assembly.GetEntryAssembly());
             _client.MessageReceived += HandleCommandAsync;
             _client.UserJoined += _client_UserJoined;
+            _client.UserLeft += _client_UserLeft;
             _client.ReactionAdded += _client_ReactionAdded;
             _client.ReactionRemoved += _client_ReactionRemoved;
             _client.GuildMemberUpdated += _client_GuildMemberUpdated;
+
+            this.userService = RestService.For<IUserService>(SystemConstants.BaseUrl); // "http://91.121.178.28:5009/api");
         }
 
         private async Task _client_GuildMemberUpdated(SocketGuildUser arg1, SocketGuildUser arg2)
@@ -82,11 +88,8 @@ namespace EynwaDiscordBot
 
                 if(!result.IsSuccess)
                 {
-                    var userService = RestService.For<IUserService>(SystemConstants.BaseLocaleUrl); // "http://91.121.178.28:5009/api");
-
-                    //var users = await userService.GetAllUsers();
-                    var eynwaGuild = this._client.GetGuild(248520271357542410);
-                    foreach(var user in eynwaGuild.Users)
+                    this.eynwaGuild = _client.GetGuild(248520271357542410);
+                    foreach (var user in this.eynwaGuild.Users)
                     {
                         if(!user.IsBot)
                         {
@@ -95,7 +98,7 @@ namespace EynwaDiscordBot
                                 DiscordId = user.Id.ToString(),
                                 Discriminator = user.Discriminator,
                                 Name = user.Username,
-                                Roles = user.Roles.First().Name
+                                Roles = user.Roles.ElementAt(1)?.Name
                             });
                         }
                     }
@@ -110,13 +113,42 @@ namespace EynwaDiscordBot
         {
             if (arg == null) return;
             await Roles.GetInstance().AddRole(Roles.Joueur, arg);
+
+            //Ajout du nouvel l'utilisateur dans la base (API)
+            if (!arg.IsBot)
+            {
+                try
+                {
+                    await userService.Create(new Models.Entities.Account.UserInfo
+                    {
+                        DiscordId = arg.Id.ToString(),
+                        Discriminator = arg.Discriminator,
+                        Name = arg.Username,
+                        Roles = Roles.Joueur
+                    });
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
         }
+
+        [Command(RunMode = RunMode.Async)]
+        private async Task _client_UserLeft(SocketGuildUser arg)
+        {
+            if (!arg.IsBot)
+            {
+                await userService.DeleteUser(arg.Id.ToString());
+            }
+        }
+
 
         [Command(RunMode = RunMode.Async)]
         private async Task _client_ReactionAdded(Cacheable<IUserMessage, ulong> arg1, ISocketMessageChannel arg2, SocketReaction arg3)
         {
-            var eynwaGuild = this._client.GetGuild(248520271357542410);
-            var user = eynwaGuild.GetUser(arg3.UserId);
+            this.eynwaGuild = _client.GetGuild(248520271357542410);
+            var user = this.eynwaGuild.GetUser(arg3.UserId);
             if(arg1.Id == 472563805306748938) //clique sur un icon de choix d'accès
             {
                 string emotName = arg3.Emote.Name;
@@ -126,7 +158,7 @@ namespace EynwaDiscordBot
                         await Roles.GetInstance().AddRole(Roles.Dj, user );
                         break;
                     case "xam":
-                        var catTest = eynwaGuild.GetChannel(472563281802821643);
+                        var catTest = this.eynwaGuild.GetChannel(472563281802821643);
                         OverwritePermissions testPermit = new OverwritePermissions(readMessageHistory: PermValue.Allow,
                                                                                            readMessages: PermValue.Allow,
                                                                                            sendMessages: PermValue.Allow,

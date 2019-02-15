@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Refit.Insane.PowerPack.Data;
 
 namespace Discord.Interop.Services
 {
@@ -24,5 +25,8 @@ namespace Discord.Interop.Services
 
         [Patch("/User/{uid}")]
         Task<UserInfo> PatchUser(string uid, [Body] UserInfo param);
+
+        [Delete("/User/{uid}")]
+        Task<Response> DeleteUser(string uid);
     }
 }
