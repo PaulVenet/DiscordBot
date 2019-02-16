@@ -12,7 +12,7 @@ namespace EynwaDiscordBot.Models.Entities.Account
         [JsonProperty("id")]
         public long Id { get; set; }
         [JsonProperty("discordId")]
-        public long DiscordId { get; set; }
+        public string DiscordId { get; set; }
         [JsonProperty("name")]
         public string Name { get; set; }
         [JsonProperty("discriminator")]

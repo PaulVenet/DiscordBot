@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Refit.Insane.PowerPack" Version="1.0.4" />
+    <PackageReference Include="Refit" Version="4.6.58" />
   </ItemGroup>
 
 </Project>
