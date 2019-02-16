@@ -3,7 +3,6 @@ using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
 using Discord.Audio;
-using Refit.Insane.PowerPack.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Discord.Interop.Services;
 using Refit;
