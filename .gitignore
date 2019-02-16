@@ -1,26 +1,18 @@
 
-\.vs/EynwaDiscordBot/v15/
+\.vs/
 
-Discord\.Interop/bin/Debug/netcoreapp2\.0/
-
-Discord\.Interop/obj/Debug/netcoreapp2\.0/
+Discord\.Interop/bin/
 
 Discord\.Interop/obj/
 
-Discord\.Logic/bin/Debug/netcoreapp2\.0/
-
-Discord\.Logic/obj/Debug/netcoreapp2\.0/
+Discord\.Logic/bin/
 
 Discord\.Logic/obj/
 
-Discord\.Models/bin/Debug/netcoreapp2\.0/
-
-Discord\.Models/obj/Debug/netcoreapp2\.0/
+Discord\.Models/bin/
 
 Discord\.Models/obj/
 
-EynwaDiscordBot/bin/Debug/netcoreapp2\.0/
-
-EynwaDiscordBot/obj/Debug/netcoreapp2\.0/
+EynwaDiscordBot/bin/
 
 EynwaDiscordBot/obj/
