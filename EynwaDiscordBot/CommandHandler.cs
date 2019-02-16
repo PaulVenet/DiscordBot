@@ -65,7 +65,8 @@ namespace EynwaDiscordBot
                             {
                                 GameName = arg1.Activity.ToString(),
                                 Timing = time,
-                                UserId = arg1.Id.ToString()
+                                UserId = arg1.Id.ToString(),
+                                Date = DateTime.Now.ToString()
                             });
                         }
                     }
@@ -84,7 +85,8 @@ namespace EynwaDiscordBot
                             {
                                 GameName = arg1.Activity.ToString(),
                                 Timing = time,
-                                UserId = arg1.Id.ToString()
+                                UserId = arg1.Id.ToString(),
+                                Date = DateTime.Now.ToString()
                             });
                         }
                     }
@@ -103,6 +105,10 @@ namespace EynwaDiscordBot
             int argPos = 0;
             if (msg.HasCharPrefix('!', ref argPos))
             {
+                //string dateInput = DateTime.Now.ToString();
+                //DateTime parsedDate = DateTime.Parse(dateInput);
+                //Console.WriteLine(parsedDate);
+
                 // REMPLISSAGE USER DB
                 //var result = await _service.ExecuteAsync(context, argPos);
                 //if (!result.IsSuccess)
