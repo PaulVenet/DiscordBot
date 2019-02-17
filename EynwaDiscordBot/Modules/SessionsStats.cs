@@ -91,12 +91,20 @@ namespace EynwaDiscordBot.Modules
 
             var rankingList = unifyGameList.OrderByDescending(t => t.Timing).ToList();
             var totalGame = rankingList.Count;
-            await Context.Channel.SendMessageAsync($"Top Game de la semaine : \n\n" +
+            if(totalGame < 5)
+            {
+                await Context.Channel.SendMessageAsync("Il faut un minimum de 5 jeux jouer pour avoir un classement !");
+            }
+            else
+            {
+                await Context.Channel.SendMessageAsync($"Top Game de la semaine : \n\n" +
                 $":first_place: {rankingList[0]?.GameName} avec {rankingList[0]?.Timing} minutes. \n" +
                 $":second_place: {rankingList[1]?.GameName} avec {rankingList[1]?.Timing} minutes. \n" +
                 $":third_place: {rankingList[2]?.GameName} avec {rankingList[2]?.Timing} minutes. \n" +
                 $":four: {rankingList[3]?.GameName} avec {rankingList[3]?.Timing} minutes.\n" +
-                $":five: {rankingList[4]?.GameName} avec {rankingList[4]?.Timing} minutes.\n" );
+                $":five: {rankingList[4]?.GameName} avec {rankingList[4]?.Timing} minutes.\n\n" +
+                $"Un total de {totalGame} jeu on étais lancer ces 7 dernier jours");
+            }
         }
 
         //[Command("TopUser", RunMode = RunMode.Async)]

@@ -66,7 +66,7 @@ namespace EynwaDiscordBot
                                 GameName = arg1.Activity.ToString(),
                                 Timing = time,
                                 UserId = arg1.Id.ToString(),
-                                Date = DateTime.Now.ToString()
+                                Date = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
                             });
                         }
                     }
@@ -86,7 +86,7 @@ namespace EynwaDiscordBot
                                 GameName = arg1.Activity.ToString(),
                                 Timing = time,
                                 UserId = arg1.Id.ToString(),
-                                Date = DateTime.Now.ToString()
+                                Date = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
                             });
                         }
                     }
