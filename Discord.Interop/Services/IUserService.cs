@@ -16,12 +16,12 @@ namespace Discord.Interop.Services
         Task<UserInfo> Create([Body] UserInfo param);
 
         [Get("/User/{uid}")]
-        Task<UserInfo> GetUser(string uid);
+        Task<UserInfo> GetUser(string discordId);
 
         [Get("/User")]
         Task<List<UserInfo>> GetAllUsers();
 
-        [Patch("/User/{uid}")]
-        Task<UserInfo> PatchUser(string uid, [Body] UserInfo param);
+        [Put("/User/{uid}")]
+        Task<UserInfo> PutUser(long uid, [Body] UserInfo param);
     }
 }

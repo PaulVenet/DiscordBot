@@ -93,6 +93,17 @@ namespace EynwaDiscordBot
                     this.userInGameList.Add(new GameUpdateDate { Date = DateTime.Now, UserId = arg2.Id });
                 }
             }
+
+            if (arg1.Roles.Count < arg2.Roles.Count) // si un roles est ajouter
+            {
+                var roledif = arg2.Roles.Where(r => !arg1.Roles.Contains(r)).First().Name;
+                if(roledif == Roles.Joueur || roledif == Roles.Amis || roledif == Roles.Admin || roledif == Roles.Modo)
+                {
+                    var user = await userService.GetUser(arg1.Id.ToString());
+                    user.Roles = roledif;
+                    await userService.PutUser(user.Id, user);
+                }
+            }
         }
 
         private async Task HandleCommandAsync(SocketMessage s)
