@@ -29,8 +29,8 @@ namespace EynwaDiscordBot.Modules
             
             List<GameSessions> unifyUserList = new List<GameSessions>();
 
-            var sessionsOfUser = sessions.Where(s => s.UserId == user.Id.ToString());
-            var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => (long)Convert.ToDouble(s.Timing));
+            var sessionsOfUser = sessions.Where(s => s.UserId == user.Id.ToString()).ToList();
+            var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => (long)double.Parse(s.Timing.Replace(".", ",")));
             foreach (var session in sessions)
             {
                 if(unifyUserList.Any(i => i.UserId == session.UserId.ToString()))
@@ -40,7 +40,7 @@ namespace EynwaDiscordBot.Modules
                     {
                         if (sessionUnify.UserId == session.UserId)
                         {
-                            sessionUnify.Timing = ((long)Convert.ToDouble(sessionUnify.Timing) + (long)Convert.ToDouble(session.Timing)).ToString();
+                            sessionUnify.Timing = (Convert.ToDouble(sessionUnify.Timing) + Convert.ToDouble(session.Timing)).ToString();
                         }
                     }
                 }
