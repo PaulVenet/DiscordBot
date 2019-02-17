@@ -16,7 +16,7 @@ namespace Discord.Interop.Services
         Task<UserInfo> Create([Body] UserInfo param);
 
         [Get("/User/{uid}")]
-        Task<UserInfo> GetUser(string discordId);
+        Task<UserInfo> GetUser(string uid);
 
         [Get("/User")]
         Task<List<UserInfo>> GetAllUsers();
