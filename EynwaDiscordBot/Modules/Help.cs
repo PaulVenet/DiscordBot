@@ -8,7 +8,7 @@ namespace EynwaDiscordBot.Modules
         [Command("Help")]
         public async Task HelpUser()
         {
-            await Context.Channel.SendMessageAsync("List des commandes disponibles :!play , !random, !mhw");
+            await Context.Channel.SendMessageAsync("List des commandes disponibles :!random , !topgame, !rank");
         }
     }
 }

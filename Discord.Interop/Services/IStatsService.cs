@@ -18,7 +18,7 @@ namespace Eynwa.Interop.Services
         Task<GameSessions> GetSession(string uid);
 
         [Get("/Sessions")]
-        Task<List<GameSessions>> GetAllSessions();
+        Task<List<GameSessions>> GetAllSessions([Query] string dateStart = null, [Query] string dateEnd = null, [Query] string userId = null, [Query] string gameName = null);
 
         [Patch("/Sessions/{uid}")]
         Task<GameSessions> PatchSessions(string uid, [Body] GameSessions param);

@@ -121,7 +121,7 @@ namespace EynwaDiscordBot
                 //Console.WriteLine(parsedDate);
 
                 // REMPLISSAGE USER DB
-                //var result = await _service.ExecuteAsync(context, argPos);
+                var result = await _service.ExecuteAsync(context, argPos);
                 //if (!result.IsSuccess)
                 //{
                 //    this.eynwaGuild = _client.GetGuild(248520271357542410);

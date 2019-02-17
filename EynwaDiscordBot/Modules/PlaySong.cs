@@ -16,12 +16,12 @@
 //        [Command("Play", RunMode = RunMode.Async)]
 //        public async Task Play(string nameRequest = null, IVoiceChannel channel = null)
 //        {
-//            string path ="";
+//            string path = "";
 //            var files = Directory.GetFiles(Directory.GetCurrentDirectory() + "\\Song");
 //            string[] songList = new string[files.Length];
-//            for (int i=0; i < files.Length; i ++)
+//            for (int i = 0; i < files.Length; i++)
 //            {
-//                if(i == 0)
+//                if (i == 0)
 //                {
 //                    songList[i] = Path.GetFileNameWithoutExtension(files[i]);
 //                }
@@ -34,14 +34,14 @@
 //                    path = files[i];
 //                    break;
 //                }
-//                if(i == files.Length -1)
+//                if (i == files.Length - 1)
 //                {
 //                    await Context.Message.Channel.SendMessageAsync("Liste des sons dispo : " + string.Concat(songList));
 //                }
 //            }
 //            channel = channel ?? (Context.Message.Author as IGuildUser)?.VoiceChannel;
 //            if (channel == null) { await Context.Message.Channel.SendMessageAsync("Connecte toi dans un chanel vocal pour m'invoquer !"); return; }
-            
+
 //            this._voiceChannel = this.Context.Guild.GetVoiceChannel(channel.Id);
 //            var audioClient = await _voiceChannel.ConnectAsync();
 
