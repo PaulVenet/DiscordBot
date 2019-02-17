@@ -13,6 +13,8 @@ namespace Eynwa.Models.Entities.Stats
         public string GameName { get; set; }
         [JsonProperty("timing")]
         public string Timing { get; set; }
+        [JsonProperty("date")]
+        public string Date { get; set; }
         [JsonProperty("userId")]
         public string UserId { get; set; }
     }
