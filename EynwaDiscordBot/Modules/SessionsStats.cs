@@ -30,7 +30,8 @@ namespace EynwaDiscordBot.Modules
             List<GameSessions> unifyUserList = new List<GameSessions>();
 
             var sessionsOfUser = sessions.Where(s => s.UserId == user.Id.ToString()).ToList();
-            var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => (long)double.Parse(s.Timing.Replace(".", ",")));
+            var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => Convert.ToDouble(s.Timing.Replace(".", ",")));
+            var totalMinutesOfWeekForUserToUp = Convert.ToInt64(totalMinutesOfWeekForUser);
             foreach (var session in sessions)
             {
                 if(unifyUserList.Any(i => i.UserId == session.UserId.ToString()))
@@ -40,7 +41,9 @@ namespace EynwaDiscordBot.Modules
                     {
                         if (sessionUnify.UserId == session.UserId)
                         {
-                            sessionUnify.Timing = (Convert.ToDouble(sessionUnify.Timing) + Convert.ToDouble(session.Timing)).ToString();
+                            var sessionUnifyTiming = Convert.ToDouble(sessionUnify.Timing);
+                            var sessionTiming = Convert.ToDouble(session.Timing);
+                            sessionUnify.Timing = (Convert.ToInt64(sessionUnifyTiming) + Convert.ToInt64(sessionTiming)).ToString();
                         }
                     }
                 }
@@ -59,7 +62,7 @@ namespace EynwaDiscordBot.Modules
             }
             else
             {
-                await Context.Channel.SendMessageAsync($"Tu es classé(e) {position} sur {totalUser} avec un total de {totalMinutesOfWeekForUser} minutes de jeu.");
+                await Context.Channel.SendMessageAsync($"Tu es classé(e) {position} sur {totalUser} avec un total de {totalMinutesOfWeekForUserToUp} minutes de jeu.");
             }
         }
 
@@ -79,7 +82,9 @@ namespace EynwaDiscordBot.Modules
                     {
                         if (sessionUnify.UserId == session.UserId)
                         {
-                            sessionUnify.Timing = ((long)Convert.ToDouble(sessionUnify.Timing) + (long)Convert.ToDouble(session.Timing)).ToString();
+                            var sessionUnifyTiming = Convert.ToDouble(sessionUnify.Timing);
+                            var sessionTiming = Convert.ToDouble(session.Timing);
+                            sessionUnify.Timing = (Convert.ToInt64(sessionUnifyTiming) + Convert.ToInt64(sessionTiming)).ToString();
                         }
                     }
                 }
@@ -93,7 +98,7 @@ namespace EynwaDiscordBot.Modules
             var totalGame = rankingList.Count;
             if(totalGame < 5)
             {
-                await Context.Channel.SendMessageAsync("Il faut un minimum de 5 jeux jouer pour avoir un classement !");
+                await Context.Channel.SendMessageAsync("La communauté dois avoir jouer à au moins 5 jeux pour avoir un classement !");
             }
             else
             {
