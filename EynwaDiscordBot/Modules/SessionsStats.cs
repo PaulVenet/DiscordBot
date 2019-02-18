@@ -27,37 +27,56 @@ namespace EynwaDiscordBot.Modules
             var user = Context.Message.Author;
             var startDate = DateTime.Now.Add(new TimeSpan(-7,0,0,0));
             var sessions = await this.statsService.GetAllSessions(dateStart : startDate.ToString(), dateEnd : DateTime.Now.ToString()); //get sessions from the last 7 days
-            
-            List<GameSessions> unifyUserList = new List<GameSessions>();
+            Console.WriteLine("start ");
+            List <GameSessions> unifyUserList = new List<GameSessions>();
 
             try
             {
                 var sessionsOfUser = sessions.Where(s => s.UserId == user.Id.ToString()).ToList();
+                Console.WriteLine("get all sessions ok ");
+
                 foreach (var session in sessions)
                 {
+                    Console.WriteLine("enter boucle ");
+
                     session.Timing = session.Timing.Replace(",", ".");
                     session.Timing = session.Timing.Split(".")[0];
+                    Console.WriteLine("replace . ");
+
                     if (unifyUserList.Any(i => i.UserId == session.UserId.ToString()))
                     {
+                        Console.WriteLine("if user id == ? ");
+
                         //SI unifyUserList contient déjà l'utilisateur
                         foreach (var sessionUnify in unifyUserList)
                         {
                             if (sessionUnify.UserId == session.UserId)
                             {
+                                Console.WriteLine("try unify timing ");
+
                                 sessionUnify.Timing = (int.Parse(sessionUnify.Timing, NumberStyles.Number, new CultureInfo("fr-FR")) + int.Parse(session.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToString();
+                                Console.WriteLine("unify timing ok ");
+
                             }
                         }
                     }
                     else
                     {
                         unifyUserList.Add(session);
+                        Console.WriteLine("add session ok ");
+
                     }
                 }
+                Console.WriteLine("try get all minutes ");
+
                 var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => int.Parse(s.Timing, NumberStyles.Number, new CultureInfo("fr-FR")));
+                Console.WriteLine("get all minutes ok ");
 
                 var rankingList = unifyUserList.OrderByDescending(t => t.Timing).ToList();
                 var totalUser = rankingList.Count;
                 int position = rankingList.FindIndex(a => a.UserId == user.Id.ToString()) + 1;
+                Console.WriteLine("1 ");
+
                 if (position < 1)
                 {
                     await Context.Channel.SendMessageAsync($"Tu n'es pas classé, laisse ta vie de coter pour ça !");
@@ -66,8 +85,10 @@ namespace EynwaDiscordBot.Modules
                 {
                     await Context.Channel.SendMessageAsync($"Tu es classé(e) {position} sur {totalUser} avec un total de {MinutesToHoursConverter(totalMinutesOfWeekForUser)}.");
                 }
+                Console.WriteLine("end ");
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("error : " + e.Message);
                 Console.WriteLine("error: " + e.InnerException);
