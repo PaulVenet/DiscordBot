@@ -115,7 +115,7 @@ namespace EynwaDiscordBot.Modules
                 }
             }
 
-            var rankingList = unifyGameList.OrderByDescending(t => t.Timing).ToList();
+            var rankingList = unifyGameList.OrderByDescending(t => int.Parse(t.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToList();
             var totalGame = rankingList.Count;
             if(totalGame < 5)
             {
