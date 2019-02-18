@@ -64,7 +64,7 @@ namespace EynwaDiscordBot.Modules
 
                 var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => int.Parse(s.Timing, NumberStyles.Number, new CultureInfo("fr-FR")));
 
-                var rankingList = unifyUserList.OrderByDescending(t => t.Timing).ToList();
+                var rankingList = unifyUserList.OrderByDescending(t => int.Parse(t.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToList();
                 var totalUser = rankingList.Count;
                 int position = rankingList.FindIndex(a => a.UserId == user.Id.ToString()) + 1;
 
