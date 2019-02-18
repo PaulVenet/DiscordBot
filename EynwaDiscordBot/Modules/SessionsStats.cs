@@ -105,7 +105,7 @@ namespace EynwaDiscordBot.Modules
                 $":third_place: {rankingList[2]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[2]?.Timing.Replace(".", ",")))}. \n" +
                 $":four: {rankingList[3]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[3]?.Timing.Replace(".", ",")))}.\n" +
                 $":five: {rankingList[4]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[4]?.Timing.Replace(".", ",")))}.\n\n" +
-                $"Un total de {totalGame} jeu ont été lancer ces 7 derniers jours");
+                $"Un total de {totalGame} jeu ont été lancés ces 7 derniers jours");
             }
         }
 
