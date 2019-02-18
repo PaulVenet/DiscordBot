@@ -32,7 +32,7 @@ namespace EynwaDiscordBot.Modules
             var startDate = DateTime.Now.Add(new TimeSpan(-7,0,0,0));
             Console.WriteLine("3 ");
 
-            var sessions = await this.statsService.GetAllSessions(dateStart : startDate.ToString(), dateEnd : DateTime.Now.ToString()); //get sessions from the last 7 days
+            var sessions = await this.statsService.GetAllSessions(dateStart : startDate.ToString("dd/MM/yyyy HH:mm:ss"), dateEnd : DateTime.Now.ToString("dd /MM/yyyy HH:mm:ss")); //get sessions from the last 7 days
             Console.WriteLine("start ");
             List <GameSessions> unifyUserList = new List<GameSessions>();
 
