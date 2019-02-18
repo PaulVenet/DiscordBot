@@ -89,7 +89,7 @@ namespace EynwaDiscordBot.Modules
         public async Task topGame()
         {
             var startDate = DateTime.Now.Add(new TimeSpan(-7, 0, 0, 0));
-            var sessions = await this.statsService.GetAllSessions(dateStart: startDate.ToString(), dateEnd: DateTime.Now.ToString()); //get sessions from the last 7 days
+            var sessions = await this.statsService.GetAllSessions(dateStart: startDate.ToString("dd/MM/yyyy HH:mm:ss"), dateEnd: DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")); //get sessions from the last 7 days
 
             List<GameSessions> unifyGameList = new List<GameSessions>();
             foreach (var session in sessions)
