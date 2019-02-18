@@ -28,60 +28,43 @@ namespace EynwaDiscordBot.Modules
             var startDate = DateTime.Now.Add(new TimeSpan(-7,0,0,0)).ToString("dd/MM/yyyy HH:mm:ss");
 
             var sessions = await this.statsService.GetAllSessions(dateStart : startDate, dateEnd : DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")); //get sessions from the last 7 days
-            Console.WriteLine("Get rank");
             List <GameSessions> unifyUserList = new List<GameSessions>();
+            var sessionsOfUser = sessions.Where(s => s.UserId == user.Id.ToString()).ToList();
+            var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => int.Parse(s.Timing.Replace(",", ".").Split(".")[0], NumberStyles.Number, new CultureInfo("fr-FR")));
 
-            try
+            foreach (var session in sessions)
             {
-                var sessionsOfUser = sessions.Where(s => s.UserId == user.Id.ToString()).ToList();
+                session.Timing = session.Timing.Replace(",", ".");
+                session.Timing = session.Timing.Split(".")[0];
 
-                foreach (var session in sessions)
+                if (unifyUserList.Any(i => i.UserId == session.UserId.ToString()))
                 {
-
-                    session.Timing = session.Timing.Replace(",", ".");
-                    session.Timing = session.Timing.Split(".")[0];
-
-                    if (unifyUserList.Any(i => i.UserId == session.UserId.ToString()))
+                    //SI unifyUserList contient déjà l'utilisateur
+                    foreach (var sessionUnify in unifyUserList)
                     {
-
-                        //SI unifyUserList contient déjà l'utilisateur
-                        foreach (var sessionUnify in unifyUserList)
+                        if (sessionUnify.UserId == session.UserId)
                         {
-                            if (sessionUnify.UserId == session.UserId)
-                            {
-
-                                sessionUnify.Timing = (int.Parse(sessionUnify.Timing, NumberStyles.Number, new CultureInfo("fr-FR")) + int.Parse(session.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToString();
-
-                            }
+                            sessionUnify.Timing = (int.Parse(sessionUnify.Timing, NumberStyles.Number, new CultureInfo("fr-FR")) + int.Parse(session.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToString();
                         }
                     }
-                    else
-                    {
-                        unifyUserList.Add(session);
-
-                    }
-                }
-
-                var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => int.Parse(s.Timing, NumberStyles.Number, new CultureInfo("fr-FR")));
-
-                var rankingList = unifyUserList.OrderByDescending(t => int.Parse(t.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToList();
-                var totalUser = rankingList.Count;
-                int position = rankingList.FindIndex(a => a.UserId == user.Id.ToString()) + 1;
-
-                if (position < 1)
-                {
-                    await Context.Channel.SendMessageAsync($"{Context.Message.Author.Mention} Tu n'es pas classé(e), laisse ta vie de côté pour ça !");
                 }
                 else
                 {
-                    await Context.Channel.SendMessageAsync($"{Context.Message.Author.Mention} Tu es classé(e) {position} sur {totalUser} avec un total de {MinutesToHoursConverter(totalMinutesOfWeekForUser)}.");
+                    unifyUserList.Add(session);
                 }
-
             }
-            catch (Exception e)
+
+            var rankingList = unifyUserList.OrderByDescending(t => int.Parse(t.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToList();
+            var totalUser = rankingList.Count;
+            int position = rankingList.FindIndex(a => a.UserId == user.Id.ToString()) + 1;
+
+            if (position < 1)
             {
-                Console.WriteLine("error : " + e.Message);
-                Console.WriteLine("error: " + e.InnerException);
+                await Context.Channel.SendMessageAsync($"{Context.Message.Author.Mention} Tu n'es pas classé(e), laisse ta vie de côté pour ça !");
+            }
+            else
+            {
+                await Context.Channel.SendMessageAsync($"{Context.Message.Author.Mention} Tu es classé(e) {position} sur {totalUser} avec un total de {MinutesToHoursConverter(totalMinutesOfWeekForUser)}.");
             }
         }
 
