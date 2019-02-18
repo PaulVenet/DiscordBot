@@ -40,7 +40,7 @@ namespace EynwaDiscordBot.Modules
                     {
                         if (sessionUnify.UserId == session.UserId)
                         {
-                            sessionUnify.Timing = (Convert.ToDouble(sessionUnify.Timing) + Convert.ToDouble(session.Timing)).ToString();
+                            sessionUnify.Timing = (Double.Parse(sessionUnify.Timing.Replace(".", ",")) + Double.Parse(session.Timing.Replace(".", ","))).ToString();
                         }
                     }
                 }
@@ -59,7 +59,7 @@ namespace EynwaDiscordBot.Modules
             }
             else
             {
-                await Context.Channel.SendMessageAsync($"Tu es classé(e) {position} sur {totalUser} avec un total de {totalMinutesOfWeekForUser} minutes de jeu.");
+                await Context.Channel.SendMessageAsync($"Tu es classé(e) {position} sur {totalUser} avec un total de {MinutesToHoursConverter(totalMinutesOfWeekForUser)}.");
             }
         }
 
@@ -77,14 +77,16 @@ namespace EynwaDiscordBot.Modules
                     //SI unifyUserList contient déjà l'utilisateur
                     foreach (var sessionUnify in unifyGameList)
                     {
-                        if (sessionUnify.UserId == session.UserId)
+                        if (sessionUnify.GameName == session.GameName)
                         {
-                            sessionUnify.Timing = ((long)Convert.ToDouble(sessionUnify.Timing) + (long)Convert.ToDouble(session.Timing)).ToString();
+                            sessionUnify.Timing = ((int)Double.Parse(sessionUnify.Timing.Replace(".", ",")) + (int)Double.Parse(session.Timing.Replace(".", ","))).ToString();
                         }
                     }
                 }
                 else
                 {
+                    var temp = (int)Double.Parse(session.Timing.Replace(".", ","));
+                    session.Timing = temp.ToString();
                     unifyGameList.Add(session);
                 }
             }
@@ -98,19 +100,35 @@ namespace EynwaDiscordBot.Modules
             else
             {
                 await Context.Channel.SendMessageAsync($"Top Game de la semaine : \n\n" +
-                $":first_place: {rankingList[0]?.GameName} avec {rankingList[0]?.Timing} minutes. \n" +
-                $":second_place: {rankingList[1]?.GameName} avec {rankingList[1]?.Timing} minutes. \n" +
-                $":third_place: {rankingList[2]?.GameName} avec {rankingList[2]?.Timing} minutes. \n" +
-                $":four: {rankingList[3]?.GameName} avec {rankingList[3]?.Timing} minutes.\n" +
-                $":five: {rankingList[4]?.GameName} avec {rankingList[4]?.Timing} minutes.\n\n" +
-                $"Un total de {totalGame} jeu on étais lancer ces 7 dernier jours");
+                $":first_place: {rankingList[0]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[0]?.Timing.Replace(".", ",")))}. \n" +
+                $":second_place: {rankingList[1]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[1]?.Timing.Replace(".", ",")))}. \n" +
+                $":third_place: {rankingList[2]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[2]?.Timing.Replace(".", ",")))}. \n" +
+                $":four: {rankingList[3]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[3]?.Timing.Replace(".", ",")))}.\n" +
+                $":five: {rankingList[4]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[4]?.Timing.Replace(".", ",")))}.\n\n" +
+                $"Un total de {totalGame} jeu ont été lancer ces 7 derniers jours");
             }
         }
 
-        //[Command("TopUser", RunMode = RunMode.Async)]
-        //public async Task topUser()
-        //{
-        //    var message = await Context.Channel.SendMessageAsync($"Top");
-        //}
+        private string MinutesToHoursConverter(double minutes)
+        {
+            if(minutes > 59)
+            {
+
+                int hour = (int)minutes / 60;
+                int minutesRecalculated = (int)minutes % 60;
+                if(hour > 1)
+                {
+                    return $"{hour} heures et {minutesRecalculated} minutes";
+                }
+                else
+                {
+                    return $"{hour} heure et {minutesRecalculated} minutes";
+                }
+            }
+            else
+            {
+                return $"{minutes} minutes";
+            }
+        }
     }
 }
