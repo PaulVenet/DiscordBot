@@ -70,11 +70,11 @@ namespace EynwaDiscordBot.Modules
 
                 if (position < 1)
                 {
-                    await Context.Channel.SendMessageAsync($"Tu n'es pas classé, laisse ta vie de coter pour ça !");
+                    await Context.Channel.SendMessageAsync($"{Context.Message.Author.Mention} Tu n'es pas classé(e), laisse ta vie de côté pour ça !");
                 }
                 else
                 {
-                    await Context.Channel.SendMessageAsync($"Tu es classé(e) {position} sur {totalUser} avec un total de {MinutesToHoursConverter(totalMinutesOfWeekForUser)}.");
+                    await Context.Channel.SendMessageAsync($"{Context.Message.Author.Mention} Tu es classé(e) {position} sur {totalUser} avec un total de {MinutesToHoursConverter(totalMinutesOfWeekForUser)}.");
                 }
 
             }
