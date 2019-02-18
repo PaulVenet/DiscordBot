@@ -44,7 +44,7 @@ namespace EynwaDiscordBot.Modules
                         {
                             if (sessionUnify.UserId == session.UserId)
                             {
-                                sessionUnify.Timing = (int.Parse(sessionUnify.Timing, NumberStyles.Number) + int.Parse(session.Timing, NumberStyles.Number)).ToString();
+                                sessionUnify.Timing = (int.Parse(sessionUnify.Timing, NumberStyles.Number, new CultureInfo("fr-FR")) + int.Parse(session.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToString();
                             }
                         }
                     }
@@ -53,7 +53,7 @@ namespace EynwaDiscordBot.Modules
                         unifyUserList.Add(session);
                     }
                 }
-                var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => int.Parse(s.Timing, NumberStyles.Number));
+                var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => int.Parse(s.Timing, NumberStyles.Number, new CultureInfo("fr-FR")));
 
                 var rankingList = unifyUserList.OrderByDescending(t => t.Timing).ToList();
                 var totalUser = rankingList.Count;
@@ -69,8 +69,8 @@ namespace EynwaDiscordBot.Modules
             }
             catch(Exception e)
             {
-                Console.Write(e.Message);
-                Console.Write(e.InnerException);
+                Console.WriteLine("error : " + e.Message);
+                Console.WriteLine("error: " + e.InnerException);
             }
         }
 
@@ -92,13 +92,13 @@ namespace EynwaDiscordBot.Modules
                     {
                         if (sessionUnify.GameName == session.GameName)
                         {
-                            sessionUnify.Timing = (int.Parse(sessionUnify.Timing, NumberStyles.Number) + int.Parse(session.Timing, NumberStyles.Number)).ToString();
+                            sessionUnify.Timing = (int.Parse(sessionUnify.Timing, NumberStyles.Number, new CultureInfo("fr-FR")) + int.Parse(session.Timing, NumberStyles.Number, new CultureInfo("fr-FR"))).ToString();
                         }
                     }
                 }
                 else
                 {
-                    var temp = int.Parse(session.Timing, NumberStyles.Number);
+                    var temp = int.Parse(session.Timing, NumberStyles.Number, new CultureInfo("fr-FR"));
                     session.Timing = temp.ToString();
                     unifyGameList.Add(session);
                 }
@@ -113,11 +113,11 @@ namespace EynwaDiscordBot.Modules
             else
             {
                 await Context.Channel.SendMessageAsync($"Top Game de la semaine : \n\n" +
-                $":first_place: {rankingList[0]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[0]?.Timing, NumberStyles.Number))}. \n" +
-                $":second_place: {rankingList[1]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[1]?.Timing, NumberStyles.Number))}. \n" +
-                $":third_place: {rankingList[2]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[2]?.Timing, NumberStyles.Number))}. \n" +
-                $":four: {rankingList[3]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[3]?.Timing, NumberStyles.Number))}.\n" +
-                $":five: {rankingList[4]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[4]?.Timing, NumberStyles.Number))}.\n\n" +
+                $":first_place: {rankingList[0]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[0]?.Timing, NumberStyles.Number, new CultureInfo("fr-FR")))}. \n" +
+                $":second_place: {rankingList[1]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[1]?.Timing, NumberStyles.Number, new CultureInfo("fr-FR")))}. \n" +
+                $":third_place: {rankingList[2]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[2]?.Timing, NumberStyles.Number, new CultureInfo("fr-FR")))}. \n" +
+                $":four: {rankingList[3]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[3]?.Timing, NumberStyles.Number, new CultureInfo("fr-FR")))}.\n" +
+                $":five: {rankingList[4]?.GameName} avec {MinutesToHoursConverter(int.Parse(rankingList[4]?.Timing, NumberStyles.Number, new CultureInfo("fr-FR")))}.\n\n" +
                 $"Un total de {totalGame} jeu ont été lancés ces 7 derniers jours");
             }
         }
