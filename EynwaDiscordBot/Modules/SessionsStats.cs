@@ -30,7 +30,7 @@ namespace EynwaDiscordBot.Modules
             List<GameSessions> unifyUserList = new List<GameSessions>();
 
             var sessionsOfUser = sessions.Where(s => s.UserId == user.Id.ToString()).ToList();
-            var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => (long)double.Parse(s.Timing.Replace(".", ",")));
+            var totalMinutesOfWeekForUser = sessionsOfUser.Sum(s => (long)double.Parse(s.Timing.Replace(",", ".")));
             foreach (var session in sessions)
             {
                 if(unifyUserList.Any(i => i.UserId == session.UserId.ToString()))
@@ -40,7 +40,7 @@ namespace EynwaDiscordBot.Modules
                     {
                         if (sessionUnify.UserId == session.UserId)
                         {
-                            sessionUnify.Timing = (Double.Parse(sessionUnify.Timing.Replace(".", ",")) + Double.Parse(session.Timing.Replace(".", ","))).ToString();
+                            sessionUnify.Timing = (Double.Parse(sessionUnify.Timing.Replace(",", ".")) + Double.Parse(session.Timing.Replace(",", "."))).ToString();
                         }
                     }
                 }
@@ -79,13 +79,13 @@ namespace EynwaDiscordBot.Modules
                     {
                         if (sessionUnify.GameName == session.GameName)
                         {
-                            sessionUnify.Timing = ((int)Double.Parse(sessionUnify.Timing.Replace(".", ",")) + (int)Double.Parse(session.Timing.Replace(".", ","))).ToString();
+                            sessionUnify.Timing = ((int)Double.Parse(sessionUnify.Timing.Replace(",", ".")) + (int)Double.Parse(session.Timing.Replace(",", "."))).ToString();
                         }
                     }
                 }
                 else
                 {
-                    var temp = (int)Double.Parse(session.Timing.Replace(".", ","));
+                    var temp = (int)Double.Parse(session.Timing.Replace(",", "."));
                     session.Timing = temp.ToString();
                     unifyGameList.Add(session);
                 }
@@ -100,11 +100,11 @@ namespace EynwaDiscordBot.Modules
             else
             {
                 await Context.Channel.SendMessageAsync($"Top Game de la semaine : \n\n" +
-                $":first_place: {rankingList[0]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[0]?.Timing.Replace(".", ",")))}. \n" +
-                $":second_place: {rankingList[1]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[1]?.Timing.Replace(".", ",")))}. \n" +
-                $":third_place: {rankingList[2]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[2]?.Timing.Replace(".", ",")))}. \n" +
-                $":four: {rankingList[3]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[3]?.Timing.Replace(".", ",")))}.\n" +
-                $":five: {rankingList[4]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[4]?.Timing.Replace(".", ",")))}.\n\n" +
+                $":first_place: {rankingList[0]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[0]?.Timing.Replace(",", ".")))}. \n" +
+                $":second_place: {rankingList[1]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[1]?.Timing.Replace(",", ".")))}. \n" +
+                $":third_place: {rankingList[2]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[2]?.Timing.Replace(",", ".")))}. \n" +
+                $":four: {rankingList[3]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[3]?.Timing.Replace(",", ".")))}.\n" +
+                $":five: {rankingList[4]?.GameName} avec {MinutesToHoursConverter(Double.Parse(rankingList[4]?.Timing.Replace(",", ".")))}.\n\n" +
                 $"Un total de {totalGame} jeu ont été lancés ces 7 derniers jours");
             }
         }
